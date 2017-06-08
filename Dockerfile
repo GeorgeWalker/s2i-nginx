@@ -18,6 +18,8 @@ RUN yum install --setopt=tsflags=nodocs -y centos-release-scl-rh \
  && yum install --setopt=tsflags=nodocs -y bcrypt nginx dnsmasq \
  && yum clean all -y \
  && mkdir -p /opt/app-root/etc/nginx.conf.d /opt/app-root/run $NGINX_VAR_DIR/cache/nginx \
+ && chmod -R a+rx  /sbin/dnsmasq \
+ && chmod -R a+rx  /etc/dnsmasq.conf \
  && chmod -R a+rx  /usr/lib64/nginx \
  && chmod -R a+rwX $NGINX_VAR_DIR/log/nginx \
                    $NGINX_VAR_DIR/run \
@@ -28,8 +30,6 @@ COPY ./etc/ /opt/app-root/etc
 COPY ./.s2i/bin/ ${STI_SCRIPTS_PATH}
 
 USER root
-
-RUN /usr/sbin/dnsmasq -d &
 
 RUN chown -R 1001:1001 /opt/app-root
 

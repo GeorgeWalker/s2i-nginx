@@ -22,4 +22,7 @@ envsubst_config() {
 
 envsubst_config
 
+# start dnsmasq
+/usr/sbin/dnsmasq -d &
+
 exec ${NGINX_BASE_DIR}/nginx -c "$NGINX_CONF"
