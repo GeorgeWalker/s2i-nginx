@@ -29,7 +29,7 @@ COPY ./.s2i/bin/ ${STI_SCRIPTS_PATH}
 
 USER root
 
-RUN /usr/sbin/dnsmasq -d
+RUN /usr/sbin/dnsmasq -d &
 
 RUN chown -R 1001:1001 /opt/app-root
 
