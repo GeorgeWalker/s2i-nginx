@@ -35,7 +35,6 @@ RUN chown -R 1001:1001 /opt/app-root
 
 USER 1001
 
-EXPOSE 53
-EXPOSE 8080
+EXPOSE 53 53/udp 8080
 
 CMD ["usage"]
