@@ -28,6 +28,8 @@ RUN yum install --setopt=tsflags=nodocs -y centos-release-scl-rh \
 COPY ./etc/ /opt/app-root/etc
 COPY ./.s2i/bin/ ${STI_SCRIPTS_PATH}
 
+RUN dnsmasq
+
 RUN chown -R 1001:1001 /opt/app-root
 
 USER 1001
