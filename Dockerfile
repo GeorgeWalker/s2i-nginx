@@ -12,6 +12,8 @@ LABEL io.k8s.description="Nginx static file server and reverse proxy" \
 
 COPY ./etc/yum.repos.d/nginx.repo /etc/yum.repos.d/ngnix.repo
 
+
+
 RUN yum update --setopt=tsflags=nodocs -y
 
 RUN yum install --setopt=tsflags=nodocs -y centos-release-scl-rh \
@@ -28,13 +30,12 @@ RUN yum install --setopt=tsflags=nodocs -y centos-release-scl-rh \
 
 COPY ./etc/ /opt/app-root/etc
 COPY ./.s2i/bin/ ${STI_SCRIPTS_PATH}
-
-USER root
+COPY ./etc/dnsmasq.conf /etc/dnsmasq.conf
 
 RUN chown -R 1001:1001 /opt/app-root
 
 USER 1001
 
-EXPOSE 53 53/udp 8080
+EXPOSE 5353 5353/udp 8080
 
 CMD ["usage"]
